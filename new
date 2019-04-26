@@ -1,0 +1,8 @@
+ntrials = 10e6;    %number of Monte Carlo trials
+nbreaks = 2;      %number of breakpoints
+break_locations = rand(nbreaks,ntrials);     %break point locations
+stick_lenghts = [min(break_locations); abs(diff(break_locations)); 1-max(break_locations)];      %lengths of the three stick pieces
+order_stats = sort(stick_lenghts);    %smallest, middle, and longest lengths
+mean_order_stats = mean(order_stats,2);    %averages 
+std_order_stats = std(order_stats,[],2);    %standard deviations
+disp([mean_order_stats 1.96*std_order_stats/sqrt(ntrials)] )      %display the three averages along side their 95% CI margins of error
